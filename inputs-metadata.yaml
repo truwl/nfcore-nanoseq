@@ -1,0 +1,450 @@
+parameter_meta:
+  nanoseq.samplesheet:
+    description: Path to comma-separated file containing information about the samples
+      in the experiment.
+    group: input_output_options
+    help: You will need to create a design file with information about the samples
+      in your experiment before running the pipeline. Use this parameter to specify
+      its location. It has to be a comma-separated file with 3 columns, and a header
+      row. See [usage docs](https://nf-co.re/nanoseq/usage).
+    hidden: false
+  nanoseq.protocol:
+    description: Path to comma-separated file containing information about the samples
+      in the experiment.
+    group: input_output_options
+    help: You will need to create a design file with information about the samples
+      in your experiment before running the pipeline. Use this parameter to specify
+      its location. It has to be a comma-separated file with 3 columns, and a header
+      row. See [usage docs](https://nf-co.re//usage#samplesheet-input).
+    hidden: false
+  nanoseq.outdir:
+    description: Path to the output directory where the results will be saved.
+    group: input_output_options
+    help: ''
+    hidden: false
+  nanoseq.email:
+    description: Email address for completion summary.
+    group: input_output_options
+    help: Set this parameter to your e-mail address to get a summary e-mail with details
+      of the run sent to you when the workflow exits. If set in your user config file
+      (`~/.nextflow/config`) then you don't need to specify this on the command line
+      for every run.
+    hidden: false
+  nanoseq.multiqc_title:
+    description: MultiQC report title. Printed as page header, used for filename if
+      not otherwise specified.
+    group: input_output_options
+    help: ''
+    hidden: false
+  nanoseq.input_path:
+    description: Path to Nanopore run directory (e.g. 'fastq_pass/') or a basecalled
+      fastq file that requires demultiplexing. The latter can only be provided in
+      conjunction with the '--skip_basecalling' parameter.
+    group: basecalling_demultiplexing_options
+    help: ''
+    hidden: false
+  nanoseq.flowcell:
+    description: Flowcell used to perform the sequencing e.g. 'FLO-MIN106'. Not required
+      if '--guppy_config' is specified.
+    group: basecalling_demultiplexing_options
+    help: ''
+    hidden: false
+  nanoseq.kit:
+    description: Kit used to perform the sequencing e.g. 'SQK-LSK109'. Not required
+      if '--guppy_config' is specified.
+    group: basecalling_demultiplexing_options
+    help: ''
+    hidden: false
+  nanoseq.barcode_kit:
+    description: Barcode kit used to perform the sequencing e.g. 'SQK-PBK004'.
+    group: basecalling_demultiplexing_options
+    help: 'If you would like to skip the basecalling (`--skip_basecalling`) but still
+      perform the demultiplexing please specify a barcode kit that can be recognised
+      by [qcat](https://github.com/nanoporetech/qcat):
+
+
+      | `qcat` barcode kit specifications | description                                                                   |
+
+      |-----------------------------------|-------------------------------------------------------------------------------|
+
+      | `Auto`                            | Auto detect barcoding kit                                                     |
+
+      | `RBK001`                          | Rapid barcoding kit                                                           |
+
+      | `RBK004`                          | Rapid barcoding kit v4                                                        |
+
+      | `NBD103/NBD104`                   | Native barcoding kit with barcodes 1-12                                       |
+
+      | `NBD114`                          | Native barcoding kit with barcodes 13-24                                      |
+
+      | `NBD104/NBD114`                   | Native barcoding kit with barcodes 1-24                                       |
+
+      | `PBC001`                          | PCR barcoding kits with 12 barcodes                                           |
+
+      | `PBC096`                          | PCR barcoding kits with 96 barcodes                                           |
+
+      | `RPB004/RLB001`                   | Rapid PCR Barcoding Kit (SQK-RPB004) and
+      Rapid Low Input by PCR Barcoding Kit |
+
+      | `RPB004/LWB001`                   | Low Input by PCR Barcoding Kit                                                |
+
+      | `RAB204`                          | 16S Rapid Amplicon Barcoding Kit with
+      12 Barcodes                             |
+
+      | `VMK001`                          | Voltrax Barcoding Kit with 4 barcodes                                         |'
+    hidden: false
+  nanoseq.barcode_both_ends:
+    description: Require barcode on both ends for Guppy basecaller.
+    group: basecalling_demultiplexing_options
+    help: ''
+    hidden: false
+  nanoseq.guppy_config:
+    description: Config file used for basecalling that will be passed to Guppy via
+      the '--config' parameter.
+    group: basecalling_demultiplexing_options
+    help: Cannot be used in conjunction with `--flowcell` and `--kit`. This can be
+      a local file (e.g. `/your/dir/guppy_conf.cfg`) or a string specifying a configuration
+      stored in the `/opt/ont/guppy/data/` directory of Guppy.
+    hidden: false
+  nanoseq.guppy_model:
+    description: Custom basecalling model file in `json` format that will be passed
+      to Guppy via the '--model' parameter.
+    group: basecalling_demultiplexing_options
+    help: Custom basecalling models can be trained with software such as [Taiyaki](https://github.com/nanoporetech/taiyaki).
+      This can also be a string specifying a model stored in the `/opt/ont/guppy/data`
+      directory of Guppy.
+    hidden: false
+  nanoseq.guppy_gpu:
+    description: Whether to demultiplex with Guppy in GPU mode.
+    group: basecalling_demultiplexing_options
+    help: ''
+    hidden: false
+  nanoseq.guppy_gpu_runners:
+    description: Number of '--gpu_runners_per_device' used for Guppy when using '--guppy_gpu'.
+    group: basecalling_demultiplexing_options
+    help: ''
+    hidden: false
+  nanoseq.guppy_cpu_threads:
+    description: Number of '--cpu_threads_per_caller' used for Guppy when using '--guppy_gpu'.
+    group: basecalling_demultiplexing_options
+    help: ''
+    hidden: false
+  nanoseq.gpu_device:
+    description: Basecalling device specified to Guppy in GPU mode using '--device'.
+    group: basecalling_demultiplexing_options
+    help: ''
+    hidden: false
+  nanoseq.gpu_cluster_options:
+    description: Cluster options required to use GPU resources (e.g. '--part=gpu --gres=gpu:1').
+    group: basecalling_demultiplexing_options
+    help: ''
+    hidden: false
+  nanoseq.qcat_min_score:
+    description: Specify the minimum quality score for qcat in the range 0-100.
+    group: basecalling_demultiplexing_options
+    help: ''
+    hidden: false
+  nanoseq.qcat_detect_middle:
+    description: Search for adapters in the whole read by applying the '--detect-middle'
+      parameter in qcat.
+    group: basecalling_demultiplexing_options
+    help: ''
+    hidden: false
+  nanoseq.skip_basecalling:
+    description: Skip basecalling with Guppy.
+    group: basecalling_demultiplexing_options
+    help: ''
+    hidden: false
+  nanoseq.skip_demultiplexing:
+    description: Skip demultiplexing with Guppy/qcat.
+    group: basecalling_demultiplexing_options
+    help: ''
+    hidden: false
+  nanoseq.run_nanolyse:
+    description: Filter reads from FastQ files using NanoLyse
+    group: basecalling_demultiplexing_options
+    help: ''
+    hidden: false
+  nanoseq.nanolyse_fasta:
+    description: Fasta file to be filtered against using NanoLyse
+    group: basecalling_demultiplexing_options
+    help: ''
+    hidden: false
+  nanoseq.aligner:
+    description: Specifies the aligner to use i.e. 'minimap2' or 'graphmap2'.
+    group: alignment_options
+    help: ''
+    hidden: false
+  nanoseq.stranded:
+    description: Specifies if the data is strand-specific. Automatically activated
+      when using '--protocol directRNA'.
+    group: alignment_options
+    help: 'When using `--protocol`/`--stranded` the following command-line arguments
+      will be set for `minimap2` and `graphmap2`:
+
+
+      | `nanoseq` input              | `minimap2` presets  | `graphmap2` presets |
+
+      |------------------------------|---------------------|---------------------|
+
+      | `--protocol DNA`             | -ax map-ont         | no presets          |
+
+      | `--protocol cDNA`            | -ax splice          | -x rnaseq           |
+
+      | `--protocol directRNA`       | -ax splice -uf -k14 | -x rnaseq           |
+
+      | `--protocol cDNA --stranded` | -ax splice -uf      | -x rnaseq           |'
+    hidden: false
+  nanoseq.save_align_intermeds:
+    description: Save the '.sam' files from the alignment step - not done by default.
+    group: alignment_options
+    help: ''
+    hidden: false
+  nanoseq.skip_alignment:
+    description: Skip alignment and downstream processes.
+    group: alignment_options
+    help: ''
+    hidden: false
+  nanoseq.quantification_method:
+    description: 'Specifies the transcript quantification method to use (available
+      are: bambu or stringtie2). Only available when protocol is cDNA or directRNA.'
+    group: differential_analysis_options
+    help: ''
+    hidden: false
+  nanoseq.skip_quantification:
+    description: Skip transcript quantification and differential analysis.
+    group: differential_analysis_options
+    help: ''
+    hidden: false
+  nanoseq.skip_differential_analysis:
+    description: Skip differential analysis with DESeq2 and DEXSeq.
+    group: differential_analysis_options
+    help: ''
+    hidden: false
+  nanoseq.skip_bigbed:
+    description: Skip BigBed file generation.
+    group: process_skipping_options
+    help: ''
+    hidden: false
+  nanoseq.skip_bigwig:
+    description: Skip BigWig file generation.
+    group: process_skipping_options
+    help: ''
+    hidden: false
+  nanoseq.skip_pycoqc:
+    description: Skip pycoQC.
+    group: process_skipping_options
+    help: ''
+    hidden: false
+  nanoseq.skip_nanoplot:
+    description: Skip NanoPlot.
+    group: process_skipping_options
+    help: ''
+    hidden: false
+  nanoseq.skip_fastqc:
+    description: Skip FastQC.
+    group: process_skipping_options
+    help: ''
+    hidden: false
+  nanoseq.skip_multiqc:
+    description: Skip MultiQC.
+    group: process_skipping_options
+    help: ''
+    hidden: false
+  nanoseq.skip_qc:
+    description: Skip all QC steps apart from MultiQC.
+    group: process_skipping_options
+    help: ''
+    hidden: false
+  nanoseq.igenomes_base:
+    description: Directory / URL base for iGenomes references.
+    group: reference_genome_options
+    help: ''
+    hidden: true
+  nanoseq.igenomes_ignore:
+    description: Do not load the iGenomes reference config.
+    group: reference_genome_options
+    help: Do not load `igenomes.config` when running the pipeline. You may choose
+      this option if you observe clashes between custom parameters and those supplied
+      in `igenomes.config`.
+    hidden: true
+  nanoseq.custom_config_version:
+    description: Git commit id for Institutional configs.
+    group: institutional_config_options
+    help: ''
+    hidden: true
+  nanoseq.custom_config_base:
+    description: Base directory for Institutional configs.
+    group: institutional_config_options
+    help: If you're running offline, Nextflow will not be able to fetch the institutional
+      config files from the internet. If you don't need them, then this is not a problem.
+      If you do need them, you should download the files from the repo and tell Nextflow
+      where to find them with this parameter.
+    hidden: true
+  nanoseq.hostnames:
+    description: Institutional configs hostname.
+    group: institutional_config_options
+    help: ''
+    hidden: true
+  nanoseq.config_profile_name:
+    description: Institutional config name.
+    group: institutional_config_options
+    help: ''
+    hidden: true
+  nanoseq.config_profile_description:
+    description: Institutional config description.
+    group: institutional_config_options
+    help: ''
+    hidden: true
+  nanoseq.config_profile_contact:
+    description: Institutional config contact information.
+    group: institutional_config_options
+    help: ''
+    hidden: true
+  nanoseq.config_profile_url:
+    description: Institutional config URL link.
+    group: institutional_config_options
+    help: ''
+    hidden: true
+  nanoseq.max_cpus:
+    description: Maximum number of CPUs that can be requested for any single job.
+    group: max_job_request_options
+    help: Use to set an upper-limit for the CPU requirement for each process. Should
+      be an integer e.g. `--max_cpus 1`
+    hidden: true
+  nanoseq.max_memory:
+    description: Maximum amount of memory that can be requested for any single job.
+    group: max_job_request_options
+    help: Use to set an upper-limit for the memory requirement for each process. Should
+      be a string in the format integer-unit e.g. `--max_memory '8.GB'`
+    hidden: true
+  nanoseq.max_time:
+    description: Maximum amount of time that can be requested for any single job.
+    group: max_job_request_options
+    help: Use to set an upper-limit for the time requirement for each process. Should
+      be a string in the format integer-unit e.g. `--max_time '2.h'`
+    hidden: true
+  nanoseq.help:
+    description: Display help text.
+    group: generic_options
+    help: ''
+    hidden: true
+  nanoseq.publish_dir_mode:
+    description: Method used to save pipeline results to output directory.
+    group: generic_options
+    help: The Nextflow `publishDir` option specifies which intermediate files should
+      be saved to the output directory. This option tells the pipeline what method
+      should be used to move these files. See [Nextflow docs](https://www.nextflow.io/docs/latest/process.html#publishdir)
+      for details.
+    hidden: true
+  nanoseq.email_on_fail:
+    description: Email address for completion summary, only when pipeline fails.
+    group: generic_options
+    help: An email address to send a summary email to when the pipeline is completed
+      - ONLY sent if the pipeline does not exit successfully.
+    hidden: true
+  nanoseq.plaintext_email:
+    description: Send plain-text email instead of HTML.
+    group: generic_options
+    help: ''
+    hidden: true
+  nanoseq.max_multiqc_email_size:
+    description: File size limit when attaching MultiQC reports to summary emails.
+    group: generic_options
+    help: ''
+    hidden: true
+  nanoseq.monochrome_logs:
+    description: Do not use coloured log outputs.
+    group: generic_options
+    help: ''
+    hidden: true
+  nanoseq.multiqc_config:
+    description: Custom config file to supply to MultiQC.
+    group: generic_options
+    help: ''
+    hidden: true
+  nanoseq.tracedir:
+    description: Directory to keep pipeline Nextflow logs and reports.
+    group: generic_options
+    help: ''
+    hidden: true
+  nanoseq.validate_params:
+    description: Boolean whether to validate parameters against the schema at runtime
+    group: generic_options
+    help: ''
+    hidden: true
+  nanoseq.show_hidden_params:
+    description: Show all params when using `--help`
+    group: generic_options
+    help: By default, parameters set as _hidden_ in the schema are not shown on the
+      command line when a user runs with `--help`. Specifying this option will tell
+      the pipeline to show all parameters.
+    hidden: true
+  nanoseq.enable_conda:
+    description: Run this workflow with Conda. You can also use '-profile conda' instead
+      of providing this parameter.
+    group: generic_options
+    help: ''
+    hidden: true
+  nanoseq.singularity_pull_docker_container:
+    description: Instead of directly downloading Singularity images for use with Singularity,
+      force the workflow to pull and convert Docker containers instead.
+    group: generic_options
+    help: This may be useful for example if you are unable to directly pull Singularity
+      containers to run the pipeline due to http/https proxy issues.
+    hidden: true
+parameter_group:
+  input_output_options:
+    description: Define where the pipeline should find input data and save output
+      data.
+    help: null
+    title: Input/output options
+  basecalling_demultiplexing_options:
+    description: Options required to basecall and demultiplex samples.
+    help: null
+    title: Basecalling/demultiplexing options
+  alignment_options:
+    description: Options to adjust parameters and filtering criteria for read alignments.
+    help: null
+    title: Alignment options
+  differential_analysis_options:
+    description: Options to adjust quantification and differential analysis
+    help: null
+    title: Differential analysis options
+  process_skipping_options:
+    description: Options to skip various steps within the workflow.
+    help: null
+    title: Process skipping options
+  reference_genome_options:
+    description: Reference genome related files and options required for the workflow.
+    help: null
+    title: Reference genome options
+  institutional_config_options:
+    description: Parameters used to describe centralised config profiles. These should
+      not be edited.
+    help: The centralised nf-core configuration profiles use a handful of pipeline
+      parameters to describe themselves. This information is then printed to the Nextflow
+      log when you run a pipeline. You should not need to change these values when
+      you run a pipeline.
+    title: Institutional config options
+  max_job_request_options:
+    description: Set the top limit for requested resources for any single job.
+    help: 'If you are running on a smaller system, a pipeline step requesting more
+      resources than are available may cause the Nextflow to stop the run with an
+      error. These options allow you to cap the maximum resources requested by any
+      single job so that the pipeline will run on your system.
+
+
+      Note that you can not _increase_ the resources requested by any job using these
+      options. For that you will need your own configuration file. See [the nf-core
+      website](https://nf-co.re/usage/configuration) for details.'
+    title: Max job request options
+  generic_options:
+    description: Less common options for the pipeline, typically set in a config file.
+    help: 'These options are common to all nf-core pipelines and allow you to customise
+      some of the core preferences for how the pipeline runs.
+
+
+      Typically these options would be set in a Nextflow config file loaded for all
+      pipeline runs, such as `~/.nextflow/config`.'
+    title: Generic options
